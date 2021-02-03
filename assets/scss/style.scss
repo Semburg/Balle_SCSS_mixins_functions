@@ -1,0 +1,69 @@
+@mixin ball{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+@mixin ball_rolling{
+    animation: rolling_stones 3s linear infinite;
+    @keyframes rolling_stones{
+        0%, 100% {
+            left:0;
+        }
+        50%{
+            left: 500px;
+        }
+    }
+}
+
+@mixin ball_rolling2($aname:self_name,$adur:3s,$atimingF:linear,$aIterCount:infinite){
+    animation: $aname $adur $atimingF $aIterCount;
+    @keyframes #{$aname}{
+        0%, 100% {
+            left:0;
+        }
+        50%{
+            left: 500px;
+        }
+    }
+}
+
+@mixin color_Ball($col:red){
+    background-color: $col;
+}
+
+
+.container{
+    position: relative;
+    width: 600px;
+    height: 300px;
+    border: 1px solid grey;
+}
+
+.ball1, .ball2, .ball3{
+    @include ball;
+    @include ball_rolling2();
+    position: absolute;
+    // background-color: grey;
+}
+
+.ball1{
+    background-color: red;
+    @include ball_rolling2(ball_a, 1s, linear);
+    
+}
+.ball2{
+    // background-color: blue;
+    top:100px;
+    @include color_Ball(blue);
+    @include ball_rolling2(ball_a, 2s, linear);
+    
+}
+.ball3{
+    // background-color: gold;
+    @include color_Ball(gold);
+    top: 200px;
+}
+
+
+
